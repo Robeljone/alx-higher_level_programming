@@ -1,8 +1,12 @@
 #!/usr/bin/python3
+""" defines"""
+
 
 def read_file(filename=""):
-    """function that reads a text file and prints it"""
-
-    with open(filename) as f:
+    """open and read a file
+    Args
+       filename
+    """
+    with open(filename, encoding='UTF8') as f:
         text = f.read()
-        print(text, end="")
+        print(text, end='')

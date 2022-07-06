@@ -1,9 +1,18 @@
 #!/usr/bin/python3
-if __name__ == "__main__":
+""" defines"""
 
-    def pascal_triangle(n):
-        list1 = []
-        for i in range(1, n + 1):
-            for j in range(1, i + 1):
-                list1.append(j)
-        return list1
+
+def pascal_triangle(n):
+
+    matrix = []
+    if n <= 0:
+        return(matrix)
+
+    for i in range(n):
+        matrix.append([])
+        matrix[i].append(1)
+        for j in range(1, i):
+            matrix[i].append(matrix[i - 1][j - 1] + matrix[i - 1][j])
+        if (i != 0):
+            matrix[i].append(1)
+    return(matrix)

@@ -1,7 +1,13 @@
 #!/usr/bin/python3
-def append_write(filename="", text=""):
-    """function that appends a string at the end of a text file and return
-    the number of characters added"""
+""" defines"""
 
-    with open(filename, 'a') as f:
-        return f.write(text)
+
+def append_write(filename="", text=''):
+    """append writing
+    Args
+       filename
+       text
+    Return number of lines"""
+    with open(filename, 'a', encoding='UTF8') as f:
+        x = f.write(text)
+        return(x)

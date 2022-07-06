@@ -1,20 +1,21 @@
 #!/usr/bin/python3
-"""
-===============================
-module with the class Student
-===============================
-"""
+""" defines"""
 
 
 class Student:
-    """class with methods to_json for retrieves dictionary"""
+    """class student"""
 
     def __init__(self, first_name, last_name, age):
-        """method for initialized all atributes"""
-
+        """initalizer
+        Args
+           first_name
+           last_name
+           age
+        """
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self):
-        return self.__dict__
+        """retrieves dictionary representation of instance"""
+        return (self.__dict__)

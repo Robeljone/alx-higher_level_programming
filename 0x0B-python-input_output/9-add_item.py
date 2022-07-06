@@ -1,18 +1,19 @@
 #!/usr/bin/python3
-from sys import argv
-save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
+import json
+import sys
+"""laods adds and saves a file"""
+
 load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
+save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
 
+num = len(sys.argv)
 
-list1 = []
 
 try:
-    list1 = list(load_from_json_file("add_item.json"))
-
+    data = load_from_json_file('add_item.json')
 except:
-    len(list1) == 0
+    data = []
 
-for arg in range(1, len(argv)):
-    list1.append(argv[arg])
-
-save_to_json_file(list1, "add_item.json")
+for i in range(1, num):
+    data.append(sys.argv[i])
+save_to_json_file(data, 'add_item.json')
