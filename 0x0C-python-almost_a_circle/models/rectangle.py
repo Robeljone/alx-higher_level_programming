@@ -1,132 +1,123 @@
 #!/usr/bin/python3
-
-'''
-Defines the class Rectangle
-'''
+"""
+This module implements a Rectangle object
+"""
 from models.base import Base
-import sys
 
 
 class Rectangle(Base):
-    """rectangle class almost a circle project"""
+    """Rectangle implementation
+    """
 
-    def __init__(self, width, height, x=0, y=0, id=None):
-        """intializer for Rectangle class
-        Args
-           width
-           height
-           x
-           y
-           id - from Base class
+    def __init__(self, width: int, height: int, x=0, y=0, id=None):
+        """initialization
         """
+        super().__init__(id)
+
         self.width = width
         self.height = height
         self.x = x
         self.y = y
-        super().__init__(id)
+
+    def __str__(self) -> str:
+        """string representation
+        """
+        return "[Rectangle] ({}) {}/{} - {}/{}" \
+            .format(self.id, self.x, self.y, self.width, self.height)
+
+    def check_type_value(self, name:  str, value: object, greater_equal=False):
+        """type and value validation
+        """
+
+        if not isinstance(value, int):
+            raise TypeError("{} must be an integer".format(name))
+        if not greater_equal:
+            if value <= 0:
+                raise ValueError("{} must be > 0".format(name))
+        else:
+            if value < 0:
+                raise ValueError("{} must be >= 0".format(name))
 
     @property
-    def width(self):
-        """gets width"""
-        return (self.__width)
+    def width(self) -> int:
+        """width getter
+        """
+        return self.__width
 
     @width.setter
-    def width(self, value):
-        """sets width
-        Args
-           value
+    def width(self, width: int):
+        """width setter
         """
-        if not isinstance(value, int):
-            raise TypeError('{} must be an integer'.format('width'))
-        if value <= 0:
-            raise ValueError('{} must be > 0'.format('width'))
-        self.__width = value
+        self.check_type_value('width', width)
+        self.__width = width
 
     @property
-    def height(self):
-        """gets height"""
-        return (self.__height)
+    def height(self) -> int:
+        """height getter
+        """
+        return self.__height
 
     @height.setter
-    def height(self, value):
-        """sets height
-        Args
-           value
+    def height(self, height: int):
+        """height setter
         """
-        if not isinstance(value, int):
-            raise TypeError('{} must be an integer'.format('height'))
-        if value <= 0:
-            raise ValueError('{} must be > 0'.format('height'))
-        self.__height = value
+        self.check_type_value('height', height)
+        self.__height = height
 
     @property
-    def x(self):
-        """gets x"""
-        return(self.__x)
+    def x(self) -> int:
+        """x getter
+        """
+        return self.__x
 
     @x.setter
-    def x(self, value):
-        """sets x
-        Args
-           x
+    def x(self, x: int):
+        """x setter
         """
-        if not isinstance(value, int):
-            raise TypeError('{} must be an integer'.format('x'))
-        if value < 0:
-            raise ValueError('{} must be >= 0'.format('x'))
-        self.__x = value
+        self.check_type_value('x', x, True)
+        self.__x = x
 
     @property
-    def y(self):
-        """gets y"""
-        return(self.__y)
+    def y(self) -> int:
+        """y getter
+        """
+        return self.__y
 
     @y.setter
-    def y(self, value):
-        """sets y
-        Args
-           y
+    def y(self, y: int):
+        """y setter
         """
-        if not isinstance(value, int):
-            raise TypeError('{} must be an integer'.format('y'))
-        if value < 0:
-            raise ValueError('{} must be >= 0'.format('y'))
-        self.__y = value
+        self.check_type_value('y', y, True)
+        self.__y = y
 
-    def area(self):
-        """returns area of rectangle"""
-        return(self.height * self.width)
+    def area(self) -> int:
+        """area
+        """
+        return self.width * self.height
 
     def display(self):
-        """displays rectangle"""
-        print('\n' * self.y, end="")
-        for i in range(self.height):
-            print(' ' * self.x, end="")
-            print('#' * self.width)
-
-    def __str__(self):
-        """returns string of info about rectangle"""
-        return('[Rectangle] ({}) {}/{} - {}/{}'
-               .format(self.id, self.x, self.y, self.width, self.height))
+        """prints # shape of the rectangle
+        """
+        print('\n'*self.y, end='')
+        for l in range(self.height):
+            print(' '*self.x + '#'*self.width)
 
     def update(self, *args, **kwargs):
-        """assigns arguments to each attribute"""
-        if args:
-            keys = ['id', 'width', 'height', 'x', 'y']
-            for k, v in zip(keys, args):
-                setattr(self, k, v)
-        else:
-            keys = ['id', 'width', 'height', 'x', 'y']
-            if kwargs is not None:
-                for k, v in kwargs.items():
-                    if k in keys:
-                        setattr(self, k, v)
+        """update rectangle attributes
+        """
 
-    def to_dictionary(self):
-        """dictiobnary representation of rectangle"""
-        my_dic = {}
-        keys = ['id', 'width', 'height', 'x', 'y']
+        expect = (self.id, self.width, self.height, self.x, self.y)
+        if args != ():
+            self.id, self.width, self.height, self.x, self.y = \
+                args + expect[len(args):len(expect)]
+        elif kwargs:
+            for (name, value) in kwargs.items():
+                setattr(self, name, value)
 
-        for k in keys:
-            my_dic[k] = getattr(self, k)
-        return(my_dic)
+    def to_dictionary(self) -> int:
+        """rectangle to dictionary
+        """
+
+        return {
+            'x': self.x, 'y': self.y, 'id': self.id,
+            'height': self.height, 'width': self.width}
