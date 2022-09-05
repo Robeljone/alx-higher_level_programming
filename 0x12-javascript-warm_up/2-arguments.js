@@ -1,8 +1,12 @@
 #!/usr/bin/node
-const numArgs = process.argv.length - 2;
-if (numArgs === 0) {
+/*
+prints statements about c, python, and javascript */
+'use strict';
+const myArgs = process.argv.length;
+
+if (myArgs < 3) {
   console.log('No argument');
-} else if (numArgs === 1) {
+} else if (myArgs === 3) {
   console.log('Argument found');
 } else {
   console.log('Arguments found');

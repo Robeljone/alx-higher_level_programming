@@ -1,6 +1,7 @@
 #!/usr/bin/node
-module.exports = {
-  add: function (a, b) {
-    return a + b;
-  }
+/*
+returns the addition of two ints
+*/
+exports.add = function (a, b) {
+  return (a + b);
 };

@@ -4,11 +4,9 @@ const myObject = {
   value: 12
 };
 console.log(myObject);
-
 myObject.incr = function () {
-  return this.value++;
+  return myObject.value++;
 };
-
 myObject.incr();
 console.log(myObject);
 myObject.incr();
