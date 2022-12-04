@@ -1,14 +1,15 @@
 #!/usr/bin/python3
-'''fetches status of https://intranet.hbtn.io/status'''
-import requests
-import sys
+"""Takes in Github credentials (username and password) and uses the Github API
+to display an id"""
+
 
 if __name__ == "__main__":
+    import requests
+    import sys
 
-    user = sys.argv[1]
-    pwd = sys.argv[2]
-    r = requests.get("https://api.github.com/user",
+    r = requests.get('https://api.github.com/user',
                      auth=(sys.argv[1], sys.argv[2]))
-    data = r.json()
-    id = data.get('id')
-    print(id)
+    if r.status_code >= 400:
+        print('None')
+    else:
+        print(r.json().get('id'))

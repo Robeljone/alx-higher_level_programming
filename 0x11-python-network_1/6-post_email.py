@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-'''fetches status of https://intranet.hbtn.io/status'''
-import requests
+"""
+Use requests package to make a post request sending email param
+and display body of response.
+"""
 import sys
+import requests
 
 if __name__ == "__main__":
-
-    data = {'email': sys.argv[2]}
-    r = requests.post(sys.argv[1], data=data)
+    url = sys.argv[1]
+    payload = {'email': sys.argv[2]}
+    r = requests.post(url, data=payload)
     print(r.text)

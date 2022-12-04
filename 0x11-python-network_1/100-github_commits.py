@@ -1,18 +1,17 @@
 #!/usr/bin/python3
-'''get commits from user rails'''
-import sys
-import requests
+"""Takes in Github repo nd owner name to list
+10 commits (from the most recent to oldest)"""
+
 
 if __name__ == "__main__":
-    user = sys.argv[2]
-    repo = sys.argv[1]
-    req = "https://api.github.com/repos/" + user + '/' + repo + '/commits'
-    r = requests.get(req)
-    data = r.json()
-    count = 0
-    for dic in data:
-        print("{}: {}".format(dic.get('sha'),
-                              dic.get('commit').get('author').get('name')))
-        count += 1
-        if count == 10:
-            break
+    import requests
+    import sys
+
+    r = requests.get('https://api.github.com/repos/{}/{}/commits'
+                     .format(sys.argv[2], sys.argv[1]))
+    if r.status_code >= 400:
+        print('None')
+    else:
+        for com in r.json()[:10]:
+            print("{}: {}".format(com.get('sha'),
+                                  com.get('commit').get('author').get('name')))

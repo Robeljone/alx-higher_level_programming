@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-'''fetches status of https://intranet.hbtn.io/status'''
-import requests
+"""
+Use requests package to make a get request to given URL and display
+the value of `X-Request-Id` in response header.
+"""
 import sys
+import requests
 
 if __name__ == "__main__":
-
-    r = requests.get(sys.argv[1])
-    print(r.headers.get('X-Request-Id'))
+    url = sys.argv[1]
+    r = requests.get(url)
+    print(r.headers.get('x-request-id'))
