@@ -1,6 +1,3 @@
 #!/bin/bash
-# Bash script that sends a request to a URL passed as an argument,
-# displays only the status code of the response
-# not used any pipe, redirection, etc.
-# not used ; and &&
-curl -s "$1" -o /dev/null -w "%{http_code}"
+#sends a request to a URL passed as an argument, and displays only the status code of the response.
+curl -s -o /dev/null -w "%{http_code}" "$1"
